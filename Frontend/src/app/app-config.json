@@ -1,0 +1,10 @@
+{
+    "excludedUrls": [
+        "/api/Auth/login",
+        "/api/Auth/register"
+    ],
+    "refreshTokenKey": "refresh_token",
+    "accessTokenKey": "access_token",
+    "userNameKey": "user_name",
+    "userRolesKey": "user_roles"
+}

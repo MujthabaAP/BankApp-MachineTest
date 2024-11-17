@@ -1,0 +1,65 @@
+<div *ngIf="isLoading" class="overlay">
+    <div class="loader"></div>
+</div>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow" style="width: 28rem;">
+        <h2 class="text-center mb-4 text-success">Register</h2>
+        <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm)">
+            <!-- Username -->
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username"
+                    [(ngModel)]="registerData.username" required #username="ngModel" />
+                <div *ngIf="username.invalid && username.touched" class="text-danger">
+                    Username is required.
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="registerData.email"
+                    required #email="ngModel" />
+                <div *ngIf="email.invalid && email.touched" class="text-danger">
+                    Please enter a valid email.
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password"
+                    [(ngModel)]="registerData.password" required minlength="6" #password="ngModel" />
+                <div *ngIf="password.invalid && password.touched" class="text-danger">
+                    Password must be at least 6 characters long.
+                </div>
+            </div>
+
+            <!-- Role -->
+            <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select id="role" class="form-select" name="role" [(ngModel)]="registerData.role" required
+                    #role="ngModel">
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="RELATIONSHIP_MANAGER">Relationship Manager</option>
+                    <option value="BRANCH_MANAGER">Branch Manager</option>
+                </select>
+                <div *ngIf="role.invalid && role.touched" class="text-danger">
+                    Please select a role.
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-success w-100" [disabled]="registerForm.invalid">
+                Register
+            </button>
+
+            <div *ngIf="isInvalid" class="alert alert-danger mt-3">{{errorMessage}}</div>
+
+            <!-- Login Link -->
+            <div class="text-center mt-3">
+                <a routerLink="/login" class="text-decoration-none">Already have an account? Login</a>
+            </div>
+        </form>
+    </div>
+</div>

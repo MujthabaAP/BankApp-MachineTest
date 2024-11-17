@@ -1,0 +1,118 @@
+<div *ngIf="isLoading" class="overlay">
+    <div class="loader"></div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center">
+            <i class="bi bi-person-circle fs-4 text-primary me-2"></i>
+            <span class="navbar-text fs-5">Welcome, <strong>{{userName}}</strong></span>
+        </div>
+        <button class="btn btn-outline-danger btn-sm" (click)="onLogout()">
+            <i class="bi bi-box-arrow-right me-1"></i> Logout
+        </button>
+    </div>
+</nav>
+
+<div class="container mt-5" *ngIf="isVisibleCustomerFeature">
+    <h2 class="text-center mb-4">Customer List</h2>
+    <button class="btn btn-outline-success d-flex align-items-center add-new-cust"
+        (click)="addNewCustomerInit(); untouchForm(customerForm)">
+        <i class="bi bi-person-plus me-2"></i> Add New Customer
+    </button>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-light">
+            <tr>
+                <th>Customer Number</th>
+                <th>Customer Name</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let customer of customers">
+                <td>{{ customer.customerNumber }}</td>
+                <td>{{ customer.customerName }}</td>
+                <td>{{ customer.dateOfBirth | date:'mediumDate' }}</td>
+                <td>{{ customer.gender == "M" ? "Male" : "Female" }}</td>
+                <td>
+                    <button class="btn btn-info btn-sm" (click)="viewCustomer(customer)">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <button class="btn btn-warning btn-sm"
+                        (click)="editCustomerInit(customer); untouchForm(customerForm)">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                </td>
+            </tr>
+
+            <tr *ngIf="customers.length == 0">
+                <td colspan="5">No Customer data availabe to list</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCustomerModalLabel">{{modalHeading}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Customer Registration Form -->
+                <form #customerForm="ngForm" (ngSubmit)="onSubmit(customerForm)">
+                    <div class="mb-3">
+                        <label for="customerName" class="form-label">Customer Name</label>
+                        <input type="text" id="customerName" class="form-control" [(ngModel)]="newCustomer.customerName"
+                            name="customerName" required #customerName="ngModel">
+                        <div *ngIf="customerName.invalid && customerName.touched" class="text-danger">
+                            Customer Name is required.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="customerNumber" class="form-label">Customer Number</label>
+                        <input type="number" id="customerNumber" class="form-control"
+                            [(ngModel)]="newCustomer.customerNumber" name="customerNumber" #customerNumber="ngModel"
+                            required>
+                        <div *ngIf="customerNumber.invalid && customerNumber.touched" class="text-danger">
+                            Customer Number is required.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="customerDob" class="form-label">Date of Birth</label>
+                        <input type="date" id="customerDob" class="form-control" [(ngModel)]="newCustomer.dateOfBirth"
+                            name="dateOfBirth" required #dateOfBirth="ngModel">
+                        <div *ngIf="dateOfBirth.invalid && dateOfBirth.touched" class="text-danger">
+                            Date of Birth is required.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="customerGender" class="form-label">Gender</label>
+                        <select class="form-control" id="customerGender" [(ngModel)]="newCustomer.gender" name="gender"
+                            required #gender="ngModel">
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                        <div *ngIf="gender.invalid && gender.touched" class="text-danger">
+                            Gender is required.
+                        </div>
+                    </div>
+                </form>
+                <div *ngIf="hasError" class="alert alert-danger mt-3">{{errorMessage}}</div>
+            </div>
+            <div class="modal-footer" *ngIf="newCustomer.operation != 'VIEW'">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">
+                    <i class="bi bi-x-circle me-2"></i> Cancel
+                </button>
+                <button type="submit" class="btn btn-primary" (click)="onSubmit(customerForm)">
+                    <i class="bi bi-save me-2"></i> Save Customer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
