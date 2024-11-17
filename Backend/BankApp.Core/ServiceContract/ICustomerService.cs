@@ -8,6 +8,6 @@ namespace BankApp.Core.ServiceContract
         Task<CustomerResponseDTO?> GetCustomerById(Guid Id);
         Task<CustomerResponseDTO?> AddCustomer(CustomerRequestDTO request);
         Task<CustomerResponseDTO?> UpdateCustomer(Guid Id, CustomerRequestDTO request);
-        Task<bool> IsCustomerNoExists(int customerNo);
+        Task<bool> IsCustomerNoExists(long customerNo);
     }
 }

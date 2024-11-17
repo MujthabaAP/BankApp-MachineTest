@@ -24,20 +24,20 @@ namespace BankApp.API.Controllers
             try
             {
                 if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
+                    return BadRequest(new { message = ModelState });
 
                 if (await _customerService.IsCustomerNoExists(model.CustomerNumber))
-                    return BadRequest("The Customer Number already exists.");
+                    return BadRequest(new { message = "The Customer Number already exists." });
 
                 var customer = await _customerService.AddCustomer(model);
                 if (customer != null)
                     return Ok(customer);
                 else
-                    return BadRequest("Not saved");
+                    return BadRequest(new { message = "Not saved" });
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(new { message = e.Message });
             }
         }
 
@@ -47,24 +47,24 @@ namespace BankApp.API.Controllers
             try
             {
                 if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
+                    return BadRequest(new { message = ModelState });
 
                 var customerData = await _customerService.GetCustomerById(id);
                 if (customerData == null)
-                    return BadRequest("The customer does not exists");
+                    return BadRequest(new { message = "The customer does not exists" });
 
                 if (customerData.CustomerNumber != requestModel.CustomerNumber && await _customerService.IsCustomerNoExists(requestModel.CustomerNumber))
-                    return BadRequest("The Customer Number already exists.");
+                    return BadRequest(new { message = "The Customer Number already exists." });
 
                 var customer = await _customerService.UpdateCustomer(id, requestModel);
                 if (customer != null)
                     return Ok(customer);
                 else
-                    return BadRequest("Not updated");
+                    return BadRequest(new { message = "Not updated" });
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(new { message = e.Message });
             }
         }
 
@@ -78,7 +78,7 @@ namespace BankApp.API.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(new { message = e.Message });
             }
         }
 
@@ -92,7 +92,7 @@ namespace BankApp.API.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(new { message = e.Message });
             }
         }
     }

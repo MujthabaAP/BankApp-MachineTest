@@ -48,7 +48,7 @@ namespace BankApp.InfraStructure.ServiceRepo
             return customer?.ToCustomerResponse();
         }
 
-        public async Task<bool> IsCustomerNoExists(int customerNo)
+        public async Task<bool> IsCustomerNoExists(long customerNo)
         {
             var result = await _db.Customers.Where(customer => customer.CustomerNumber == customerNo).FirstOrDefaultAsync();
             return result != null ? true : false;

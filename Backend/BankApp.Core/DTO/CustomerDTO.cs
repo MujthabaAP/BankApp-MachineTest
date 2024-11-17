@@ -7,7 +7,7 @@ namespace BankApp.Core.DTO
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         [Required]
-        public int CustomerNumber { get; set; }
+        public long CustomerNumber { get; set; }
         [Required]
         public string CustomerName { get; set; } = string.Empty;
         [Required]
@@ -19,7 +19,7 @@ namespace BankApp.Core.DTO
     public class CustomerResponseDTO
     {
         public Guid Id { get; set; }
-        public int CustomerNumber { get; set; }
+        public long CustomerNumber { get; set; }
         public string? CustomerName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string? Gender { get; set; }

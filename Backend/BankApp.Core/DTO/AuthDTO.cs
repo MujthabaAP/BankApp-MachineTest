@@ -1,17 +1,27 @@
-﻿namespace BankApp.Core.DTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BankApp.Core.DTO
 {
     public class RegisterModel
     {
-        public required string Username { get; set; }
-        public required string Email { get; set; }
-        public required string Password { get; set; }
-        public required string Role { get; set; }
+        [Required]
+        public string Username { get; set; } = string.Empty;
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = string.Empty;
+        [Required]
+        public string Password { get; set; } = string.Empty;
+        [Required]
+        public string Role { get; set; } = string.Empty;
     }
 
     public class LoginModel
     {
-        public required string Email { get; set; }
-        public required string Password { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = string.Empty;
+        [Required]
+        public string Password { get; set; } = string.Empty;
     }
 
     public class TokenRequestModel

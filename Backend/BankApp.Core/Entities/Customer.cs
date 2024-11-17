@@ -8,7 +8,7 @@ namespace BankApp.Core.Entities
         public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
-        public int CustomerNumber { get; set; }
+        public long CustomerNumber { get; set; }
 
         [MaxLength(255)]
         public string CustomerName { get; set; } = string.Empty;

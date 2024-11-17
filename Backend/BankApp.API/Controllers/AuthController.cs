@@ -47,7 +47,7 @@ namespace BankApp.API.Controllers
                 var user = new IdentityUser { UserName = model.Username, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (!result.Succeeded)
-                    return BadRequest(result.Errors?.Select(err => err.Description).ToList());
+                    return BadRequest(new { message = result.Errors?.Select(err => err.Description).ToList() });
 
                 // Add the user to a role
                 if (!await _roleManager.RoleExistsAsync(model.Role))
@@ -76,7 +76,6 @@ namespace BankApp.API.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = exception.Message });
             }
-
         }
 
         [HttpPost("login")]
