@@ -21,7 +21,7 @@
                 <input type="email" class="form-control" id="email" name="email" [(ngModel)]="registerData.email"
                     required #email="ngModel" />
                 <div *ngIf="email.invalid && email.touched" class="text-danger">
-                    Please enter a valid email.
+                    Email is required.
                 </div>
             </div>
 

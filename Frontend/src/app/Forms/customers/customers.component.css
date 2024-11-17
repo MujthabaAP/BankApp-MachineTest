@@ -1,0 +1,70 @@
+/* Optional: Add margin between action buttons */
+td button {
+  margin-right: 10px;
+}
+
+th,
+td {
+  text-align: center;
+}
+
+button i {
+  font-size: 1.2rem;
+}
+
+button.add-new-cust {
+  margin-bottom: 10px;
+}
+
+/* Navbar Styling */
+.navbar {
+  padding: 15px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.navbar-text {
+  font-size: 18px;
+  color: #333;
+}
+
+.btn-outline-danger {
+  font-size: 14px;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Box shadow for navbar */
+.shadow-sm {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tbl-customer th {
+  font-weight: bold;
+  font-size: 13px;
+}
+.tbl-customer td{
+  font-size: 14px;
+}
+
+/* footer */
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(248 249 250);
+  color: rgb(7, 7, 7);
+  text-align: center;
+}
+.footer hr {
+  margin: 0px;
+}
+.footer div {
+  padding: 10px;
+}

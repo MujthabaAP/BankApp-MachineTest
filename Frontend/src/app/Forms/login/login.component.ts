@@ -29,7 +29,7 @@ export class LoginComponent {
         this.service.login(this.loginData).subscribe({
           next: (data) => {
             this.isLoading = false;
-            this.router.navigate(['/home']);
+            this.router.navigate(['/dashboard']);
           },
           error: (error) => {
             this.isLoading = false;

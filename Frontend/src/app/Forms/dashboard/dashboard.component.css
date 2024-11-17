@@ -1,0 +1,9 @@
+.nbk-sidebar .nav-link {
+    padding-left: 26px;
+}
+
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-brand img {
+        height: 54px;
+    }
+}

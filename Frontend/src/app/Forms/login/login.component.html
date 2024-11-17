@@ -1,11 +1,13 @@
 <div *ngIf="isLoading" class="overlay">
     <div class="loader"></div>
 </div>
+
+<!-- <app-dashboard></app-dashboard> -->
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card p-4 shadow" style="width: 25rem;">
-        <h2 class="text-center mb-4 text-primary">Login</h2>
+        <h2 class="text-center mb-4 text-primary">Sign in</h2>
         <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
-            <!-- Email -->
+
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" [(ngModel)]="loginData.email" required
@@ -15,7 +17,6 @@
                 </div>
             </div>
 
-            <!-- Password -->
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password"
@@ -25,15 +26,13 @@
                 </div>
             </div>
 
-            <!-- Submit Button -->
             <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">
-                Login
+                Sign in
             </button>
             <div *ngIf="inValidCredential" class="alert alert-danger mt-3">
                 {{errorMessage}}
             </div>
 
-            <!-- Register Link -->
             <div class="text-center mt-3">
                 <a routerLink="/register" class="text-decoration-none">Don't have an account? Register</a>
             </div>

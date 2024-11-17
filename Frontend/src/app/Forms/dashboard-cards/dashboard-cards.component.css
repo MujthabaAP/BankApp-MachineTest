@@ -1,0 +1,22 @@
+.nbk-sidebar .nav-link {
+    padding-left: 26px;
+}
+
+/* footer */
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(248 249 250);
+    color: rgb(7, 7, 7);
+    text-align: center;
+}
+
+.footer hr {
+    margin: 0px;
+}
+
+.footer div {
+    padding: 10px;
+}

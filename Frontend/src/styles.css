@@ -1,6 +1,11 @@
+
 /* You can add global styles to this file, and also import other style files */
 body {
     background-color: #f8f9fa !important;
+}
+
+a:hover {
+    cursor: pointer;
 }
 
 /* Full-Screen Overlay */
@@ -14,7 +19,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 100000;
 }
 
 /* Loader Style */

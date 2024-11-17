@@ -32,7 +32,7 @@ export class RegisterComponent {
           next: (data) => {
             this.isLoading = false;
             this.toastr.success('Registered successfully!', 'Success');
-            this.router.navigate(['/home']);
+            this.router.navigate(['/dashboard']);
           },
           error: (error) => {
             this.isLoading = false;
