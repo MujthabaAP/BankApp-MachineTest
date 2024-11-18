@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Customer } from '../../Models/Customer';
+import { Customer, CustomerCount } from '../../Models/Customer';
 import { CustomerServiceEndpoint } from './CustomerServiceEndpoint';
 
 @Injectable({
@@ -11,8 +11,10 @@ export class CustomerService {
     constructor(private http: HttpClient, private endPoint: CustomerServiceEndpoint) { }
 
     // Get all customers
-    getAllCustomers(): Observable<Customer[]> {
-        return this.http.get<Customer[]>(this.endPoint.GetAllURL);
+    getAllCustomers(searchModel: Customer = new Customer()): Observable<Customer[]> {
+        return this.http.get<Customer[]>(
+            this.endPoint.GetAllURL + "?name=" + searchModel.customerName
+        );
     }
 
     // Add a new customer
@@ -33,5 +35,11 @@ export class CustomerService {
         return this.http.patch<Customer>(url, customer, {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         });
+    }
+
+    getCustomerCount(): Observable<CustomerCount> {
+        return this.http.get<CustomerCount>(
+            this.endPoint.GetCustomerCountURL
+        );
     }
 }

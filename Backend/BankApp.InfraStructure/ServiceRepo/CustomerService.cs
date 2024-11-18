@@ -21,9 +21,10 @@ namespace BankApp.InfraStructure.ServiceRepo
             return customer.ToCustomerResponse();
         }
 
-        public async Task<List<CustomerResponseDTO>?> GetAllCustomer()
+        public async Task<List<CustomerResponseDTO>?> GetAllCustomer(string? name)
         {
-            return await _db.Customers.Select(customer => customer.ToCustomerResponse()).ToListAsync();
+            return await _db.Customers.Where(customer => !string.IsNullOrEmpty(name) ? customer.CustomerName.Contains(name) : true)
+                .Select(customer => customer.ToCustomerResponse()).ToListAsync();
         }
 
         public async Task<CustomerResponseDTO?> GetCustomerById(Guid Id)
@@ -52,6 +53,11 @@ namespace BankApp.InfraStructure.ServiceRepo
         {
             var result = await _db.Customers.Where(customer => customer.CustomerNumber == customerNo).FirstOrDefaultAsync();
             return result != null ? true : false;
+        }
+
+        public async Task<int> GetCustomersCount()
+        {
+            return await _db.Customers.CountAsync();
         }
     }
 }

@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/Auth/AuthService';
 import { CustomerService } from '../../Services/Customer/CustomerService';
-import { Customer } from '../../Models/Customer';
+import { Customer, CustomerCount } from '../../Models/Customer';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { NgForm } from '@angular/forms';

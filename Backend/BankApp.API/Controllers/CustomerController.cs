@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace BankApp.API.Controllers
 {
     [EnableCors("AllowSpecificOrigin")]
-    [Authorize(Roles = "RELATIONSHIP_MANAGER")]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
@@ -18,6 +17,7 @@ namespace BankApp.API.Controllers
             _customerService = customerService;
         }
 
+        [Authorize(Roles = "RELATIONSHIP_MANAGER")]
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] CustomerRequestDTO model)
         {
@@ -41,6 +41,7 @@ namespace BankApp.API.Controllers
             }
         }
 
+        [Authorize(Roles = "RELATIONSHIP_MANAGER")]
         [HttpPatch("update/{id}")]
         public async Task<IActionResult> UpdateCustomer(Guid id, [FromBody] CustomerRequestDTO requestModel)
         {
@@ -68,6 +69,7 @@ namespace BankApp.API.Controllers
             }
         }
 
+        [Authorize(Roles = "RELATIONSHIP_MANAGER")]
         [HttpGet("get-by-id/{id}")]
         public async Task<IActionResult> GetCustomerById(Guid id)
         {
@@ -82,13 +84,28 @@ namespace BankApp.API.Controllers
             }
         }
 
+        [Authorize(Roles = "RELATIONSHIP_MANAGER")]
         [HttpGet("get-all")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(string? name)
         {
             try
             {
-                var customer = await _customerService.GetAllCustomer();
+                var customer = await _customerService.GetAllCustomer(name);
                 return Ok(customer);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpGet("get-customers-count")]
+        public async Task<IActionResult> GetCustomersCount()
+        {
+            try
+            {
+                return Ok(new { customerCount = await _customerService.GetCustomersCount() });
             }
             catch (Exception e)
             {

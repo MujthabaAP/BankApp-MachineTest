@@ -46,7 +46,7 @@ export class CustomersComponent {
   }
 
   getCustomerList() {
-    this.customerService.getAllCustomers().subscribe({
+    this.customerService.getAllCustomers(new Customer()).subscribe({
       next: (data: Customer[]) => {
         this.customers = data;
       },
@@ -174,10 +174,24 @@ export class CustomersComponent {
   }
 
   onSubmitSearch(customerForm: any) {
-
+    this.isLoading = true;
+    this.customerService.getAllCustomers(this.searchCustomer).subscribe({
+      next: (data: Customer[]) => {
+        this.customers = data;
+        this.isLoading = false;
+        bootstrap.Modal.getInstance(document.getElementById('searchCustomerModal')).hide();
+      },
+      error: (error) => {
+        this.isLoading = false;
+        let errorMessage = error.error ?? 'Something went wrong. Please try again.';
+        this.toastr.error(errorMessage, 'Error');
+      },
+      complete: () => console.info('complete')
+    })
   }
 
   openSearchModal() {
+    this.searchCustomer = new Customer();
     const modalElement = document.getElementById('searchCustomerModal');
     const modal = new bootstrap.Modal(modalElement!, {
       backdrop: 'static',

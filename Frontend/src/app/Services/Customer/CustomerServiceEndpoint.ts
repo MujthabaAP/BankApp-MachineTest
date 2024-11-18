@@ -9,6 +9,7 @@ export class CustomerServiceEndpoint {
     public EditURL: string = "";
     public GetAllURL: string = "";
     public GetOneURL: string = "";
+    public GetCustomerCountURL: string = "";
    
     constructor() {
         let apiHostingURL = environment.apiUrl + "/api/customer/";
@@ -16,6 +17,8 @@ export class CustomerServiceEndpoint {
         this.GetAllURL = apiHostingURL + "get-all";
         this.GetOneURL = apiHostingURL + "get-by-id";
         this.EditURL = apiHostingURL + "update";
+        this.GetCustomerCountURL = apiHostingURL + "get-customers-count";
+
     }
 }
 

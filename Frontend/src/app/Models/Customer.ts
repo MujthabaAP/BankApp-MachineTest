@@ -6,3 +6,7 @@ export class Customer {
     gender: string = "M";
     operation: string = ""
 }
+
+export class CustomerCount {
+    customerCount: number = 0;
+}

@@ -108,29 +108,16 @@
             </div>
             <div class="modal-body">
                 <!-- Customer Registration Form -->
-                <form #customerSearchForm="ngForm" (ngSubmit)="onSubmitSearch(customerForm)">
+                <form #customerSearchForm="ngForm">
                     <div class="mb-3">
                         <label for="customerName" class="form-label">Customer Name</label>
                         <input type="text" id="customerName" class="form-control" [(ngModel)]="searchCustomer.customerName"
                             name="customerName" required #customerName="ngModel">
-                        <div *ngIf="customerName.invalid && customerName.touched" class="text-danger">
-                            Customer Name is required.
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="customerNumber" class="form-label">Customer Number</label>
-                        <input type="number" id="customerNumber" class="form-control"
-                            [(ngModel)]="searchCustomer.customerNumber" name="customerNumber" #customerNumber="ngModel"
-                            required>
-                        <div *ngIf="customerNumber.invalid && customerNumber.touched" class="text-danger">
-                            Customer Number is required.
-                        </div>
                     </div>
                 </form>
-                <div *ngIf="hasError" class="alert alert-danger mt-3">{{errorMessage}}</div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-outline-primary" (click)="onSubmit(customerForm)">
+                <button type="submit" class="btn btn-outline-primary" (click)="onSubmitSearch(customerForm)">
                     <i class="bi bi-search me-2"></i> Search
                 </button>
             </div>
