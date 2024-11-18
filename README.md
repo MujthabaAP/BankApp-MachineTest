@@ -21,7 +21,7 @@ Also, please find the diagram `App communication diagram.pdf`.
      ```
 4. Update the `AllowedOrigin` value in the API if the UI URL is not `http://localhost:4200`.
 5. For `http` API URL:  
-   Update the `API_URL` in the Angular project file:  
+   Update the `apiUrl` in the Angular project file:  
    `Frontend\src\environments\environment.ts`.  
    For `https`, no changes are required since the default URL is already set.
 
